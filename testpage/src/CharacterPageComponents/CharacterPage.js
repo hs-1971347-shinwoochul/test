@@ -4,6 +4,9 @@ import { fetchUserData } from '../Store';
 import './CharacterPage.css';
 import Character from './Character';
 
+//test commit 
+//호호
+
 function CharacterPage() {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.userData);
