@@ -1,8 +1,8 @@
 import './App.css';
 import { Routes, Route, Link } from "react-router-dom";
-import ListPage from './ListPageComponents/ListPage';
+import UserPage from './UserPageComponents/UserPage';
 import Home from './HomeComponents/Home';
-import TextPage from './TextPageComponents/TextPage';
+import CharacterPage from './CharacterPageComponents/CharacterPage';
 
 function App() {
   return (
@@ -13,18 +13,18 @@ function App() {
             <Link to="/">Home</Link> {/* Link 컴포넌트를 이용하여 경로를 연결한다 */}
           </li>
           <li>
-            <Link to="/listpage">ListPage</Link>
+            <Link to="/UserPage">UserPage</Link>
           </li>
           <li>
-            <Link to="/textpage">TextPage</Link>
+            <Link to="/CharacterPage">CharacterPage</Link>
           </li>
         </ul>
       </nav>
 
         <Routes>
         <Route path="/" element={<Home />} /> 
-        <Route path="/listpage" element={<ListPage />} /> 
-        <Route path="/textpage" element={<TextPage />} />
+        <Route path="/UserPage" element={<UserPage />} /> 
+        <Route path="/CharacterPage" element={<CharacterPage />} />
       </Routes>
     </div>
   );

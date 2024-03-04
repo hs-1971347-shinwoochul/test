@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserData } from '../Store';
-import './ListPage.css';
+import './UserPage.css';
 
-function ListPage(){
+function UserPage(){
     const dispatch = useDispatch();
     const userData = useSelector((state) => state.userData);
     console.log("userdate:");
@@ -53,4 +53,4 @@ function ListPage(){
     );
 }
 
-export default ListPage;
+export default UserPage;

@@ -1,4 +1,3 @@
-
 import React,{useState} from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './Character.css'; // Import the styles
