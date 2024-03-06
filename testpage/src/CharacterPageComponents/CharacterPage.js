@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserData } from '../Store';
+import { fetchCharacterData } from '../Store';
 import './CharacterPage.css';
 import Character from './Character';
 
 function CharacterPage() {
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.userData);
+  const characterData = useSelector((state) => state.characterData);
   const [onToggle, setToggle] = useState(true);
 
   useEffect(() => {
-    dispatch(fetchUserData());
+    dispatch(fetchCharacterData());
   }, [dispatch]);
 
   const onClick = () => {
     setToggle(!onToggle);
   }
-
+  console.log(characterData);
   return (
     <div>
       <h1>Character</h1>
       <div className="user-container">
         <button className="toggleButton" onClick={onClick}>{onToggle ? "male" : "female"}</button>
-        {userData && userData.map((user) => {
-          if ((onToggle && user.gender === 'male') || (!onToggle && user.gender === 'female')) {
+        {characterData && characterData.map((character) => {
+          if ((onToggle && character.gender === 'male') || (!onToggle && character.gender === 'female')) {
             return (
-              <Character key={user.id} user={user} />
+              <Character key={character.id} character={character} />
             );
           }
         })}

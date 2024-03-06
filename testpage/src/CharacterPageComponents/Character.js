@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './Character.css'; // Import the styles
 
-export default function Character({ user }) {
+export default function Character({ character }) {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const controlModal = () => {
@@ -13,7 +13,7 @@ export default function Character({ user }) {
     <Card className="card"> {/* Apply the 'card' class */}
       <Card.Img
         variant="top"
-        src={user.imgUrl}
+        src={character.imgUrl}
         className="card-img" // Apply the 'card-img' class
       />
       <Card.Body className="card-body"> {/* Apply the 'card-body' class */}
@@ -24,12 +24,12 @@ export default function Character({ user }) {
       </Card.Body>
       <Card.Header className="card-header"> {/* Apply the 'card-header' class */}
         <div className="flex items-center space-x-4">
-          <Card.Title className="card-title">{user.name}</Card.Title>
+          <Card.Title className="card-title">{character.name}</Card.Title>
         </div>
       </Card.Header>
       {isModalOpen && (
         <div className="modal">
-            <p>{user.description_kr}</p>
+            <p>{character.description_kr}</p>
         </div>
       )}
     </Card>
