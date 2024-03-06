@@ -1,56 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserData } from '../Store';
-import './UserPage.css';
 
-function UserPage(){
-    const dispatch = useDispatch();
-    const userData = useSelector((state) => state.userData);
-    console.log("userdate:");
-    console.log(userData);
-    const [onToggle,setToggle]=useState(true);
-    const imageStyle = {
-      width: '100px', // 이미지의 너비를 300px로 지정
-      height: 'auto', // 높이를 자동으로 조정
-    };
+function UserPage() {
+  const dispatch = useDispatch();
+  const initialData = useSelector((state) => state.userData);
+  const [data, setData] = useState(initialData);
+  const [searchTerm, setSearchTerm] = useState('');
 
-    useEffect(() => {
-        dispatch(fetchUserData());
-        console.log('123');
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchUserData());
+  }, [dispatch]);
 
-    const onClick=()=>{
-        setToggle(!onToggle);
-    }
-
-    //const userArray = userData && userData.users;
-    //console.log(userArray);
-    return (
-    <div>
-        <h1>User Data</h1>
-        <table className="user-table">
-          <thead>
-          <button className="toggleButton" onClick={onClick}>{onToggle ? "male" : "female"}</button>
-            <tr className="header">
-              <th>Name</th>
-              <th>Img</th>
-              <th>description_kr</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userData && userData.map((user) => {
-              if ((onToggle && user.gender === 'male') || (!onToggle && user.gender === 'female')) {
-                return(<tr key={user.id} className="user-row">
-                <td>{user.name}</td>
-                <td><img src={user.imgUrl} style={imageStyle}/></td>
-                <td>{user.description_kr}</td>
-              </tr>);
-              }
-            })}
-          </tbody>
-        </table>
-    </div>
+  useEffect(() => {
+    // 검색어가 변경될 때마다 데이터를 필터링
+    const filteredData = initialData.filter((userData) =>
+      userData.group.toLowerCase().includes(searchTerm.toLowerCase())
     );
+    setData(filteredData);
+  }, [searchTerm, initialData]);
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search by Group"
+        value={searchTerm}
+        onChange={handleSearch}
+      />
+      {data.map((userData, index) => (
+        <div key={index} style={{ display: 'flex', flexDirection: 'row' }}>
+          <p style={{ marginRight: '10px' }}>Avatar: {userData.avatar}</p>
+          <p style={{ marginRight: '10px' }}>Gender: {userData.gender}</p>
+          <p style={{ marginRight: '10px' }}>Group: {userData.group}</p>
+          <p style={{ marginRight: '10px' }}>Name: {userData.name}</p>
+          <p style={{ marginRight: '10px' }}>Roblox ID: {userData.robloxID}</p>
+          <p>User ID: {userData.userID}</p>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default UserPage;
