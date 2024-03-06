@@ -11,6 +11,7 @@ function UserPage() {
 
   useEffect(() => {
     dispatch(fetchUserData());
+    console.log(data);
   }, [dispatch]);
 
   useEffect(() => {
@@ -36,15 +37,7 @@ function UserPage() {
         onChange={handleSearch}
       />
       {data.map((userData, index) => (
-        <User key={index} userData={userData}></User>
-        // <div key={index} style={{ display: 'flex', flexDirection: 'row' }}>
-        //   <p style={{ marginRight: '10px' }}>Avatar: {userData.avatar}</p>
-        //   <p style={{ marginRight: '10px' }}>Gender: {userData.gender}</p>
-        //   <p style={{ marginRight: '10px' }}>Group: {userData.group}</p>
-        //   <p style={{ marginRight: '10px' }}>Name: {userData.name}</p>
-        //   <p style={{ marginRight: '10px' }}>Roblox ID: {userData.robloxID}</p>
-        //   <p>User ID: {userData.userID}</p>
-        // </div>
+        <User key={index} userData={userData}/>
       ))}
     </div>
   );

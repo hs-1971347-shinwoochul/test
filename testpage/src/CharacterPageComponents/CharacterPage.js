@@ -16,7 +16,6 @@ function CharacterPage() {
   const onClick = () => {
     setToggle(!onToggle);
   }
-  console.log(characterData);
   return (
     <div>
       <h1>Character</h1>
