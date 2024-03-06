@@ -13,10 +13,12 @@ function UserPage() {
   }, [dispatch]);
 
   useEffect(() => {
-    // 검색어가 변경될 때마다 데이터를 필터링
-    const filteredData = initialData.filter((userData) =>
-      userData.group.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // initialData가 배열이 아닌 경우, 빈 배열을 사용하여 에러를 방지
+    const filteredData = Array.isArray(initialData)
+      ? initialData.filter((userData) =>
+          userData.group.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      : [];
     setData(filteredData);
   }, [searchTerm, initialData]);
 
