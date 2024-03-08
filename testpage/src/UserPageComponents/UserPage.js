@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserData } from '../Store';
 import User from './User';
+import Popup from './Popup';
 
 function UserPage() {
   const dispatch = useDispatch();
   const initialData = useSelector((state) => state.userData);
   const [data, setData] = useState(initialData);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedUser, setSelectedUser] = useState(null);
 
   useEffect(() => {
     dispatch(fetchUserData());
-    console.log(data);
   }, [dispatch]);
 
   useEffect(() => {
-    // initialData가 배열이 아닌 경우, 빈 배열을 사용하여 에러를 방지
     const filteredData = Array.isArray(initialData)
       ? initialData.filter((userData) =>
           userData.group.toLowerCase().includes(searchTerm.toLowerCase())
@@ -28,6 +28,14 @@ function UserPage() {
     setSearchTerm(e.target.value);
   };
 
+  const handleUserClick = (userData) => {
+    setSelectedUser(userData);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedUser(null);
+  };
+
   return (
     <div>
       <input
@@ -37,8 +45,13 @@ function UserPage() {
         onChange={handleSearch}
       />
       {data.map((userData, index) => (
-        <User key={index} userData={userData}/>
+        <div key={index} onClick={() => handleUserClick(userData)}>
+          <User key={index} userData={userData}/>
+        </div>
       ))}
+      {selectedUser && (
+        <Popup userData={selectedUser} onClose={handleCloseModal} />
+      )}
     </div>
   );
 }
