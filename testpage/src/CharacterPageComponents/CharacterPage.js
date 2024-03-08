@@ -20,13 +20,14 @@ function CharacterPage() {
     <div>
       <h1>Character</h1>
       <div className="user-container">
-        <button className="toggleButton" onClick={onClick}>{onToggle ? "male" : "female"}</button>
+      
         {characterData && characterData.map((character) => {
-          if ((onToggle && character.gender === 'male') || (!onToggle && character.gender === 'female')) {
+          //<button className="toggleButton" onClick={onClick}>{onToggle ? "male" : "female"}</button>
+          //if ((onToggle && character.gender === 'male') || (!onToggle && character.gender === 'female')) {
             return (
               <Character key={character.id} character={character} />
             );
-          }
+          
         })}
       </div>
     </div>

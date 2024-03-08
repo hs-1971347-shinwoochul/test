@@ -24,28 +24,28 @@ const setPersonalData = (data) => ({
 export const fetchUserData = () => async (dispatch) => {
   try {
     const address = '/default/api1/metakids_lambda_get_google_sheet?sheetID=1soQzBZjn1Kzbo_RxhHEzmb30C4ednvDwvKLu2Qhn6dM&tabName=avatar';
-    const data = [];
     const response = await axios.get(address);
     const resData = await response.data;
-    data.push(resData);
     dispatch(setUserData(resData));
 
   } catch (error) {
     console.error('Error fetching data:', error);
   }
 };
-
-export const fetchPersonalData = (userId='ddcone1212') => async (dispatch) => {
+  ///default/api2/metakids_get_avatar?userID=com.lh.1@doctorr.co.kr
+export const fetchPersonalData = (userId) => async (dispatch) => {
   try {
     const address = '/default/api2/metakids_get_avatar';
-    const data = [];
     const response = await axios.get(address,{
       params: {
-        userId : userId
+        userID : userId
       }
     });
+    console.log(userId);
+    console.log(address);
+    console.log(response);
     const resData = await response.data;
-    data.push(resData);
+    console.log(resData);
     dispatch(setPersonalData(resData));
 
   } catch (error) {
@@ -55,9 +55,9 @@ export const fetchPersonalData = (userId='ddcone1212') => async (dispatch) => {
 
 export const fetchCharacterData = () => async (dispatch) => {
   try {
-    const address = 'http://localhost:3001/get-data';
-    const response = await fetch(address);
-    const resData = await response.json();
+    const address = 'default/api3/metakids_avatars_info';
+    const response = await axios.get(address);
+    const resData = await response.data;
     dispatch(setCharacterData(resData));
   } catch (error) {
     console.error('Error fetching data:', error);
