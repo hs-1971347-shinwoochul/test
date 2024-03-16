@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserData, fetchCharacterData } from '../Store';
+import { Grid, TextField } from '@mui/material';
 import User from './User';
 import Popup from './Popup';
 
@@ -47,17 +48,21 @@ function UserPage() {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Search by Group"
+      <TextField
+        variant="outlined"
+        label="Search by Group"
         value={searchTerm}
         onChange={handleSearch}
       />
-      {data.map((userData, index) => (
-        <div key={index} onClick={() => handleUserClick(userData)}>
-          <User key={index} userData={userData} img={getImgUrlsById(userData.Avatar, characterData)}/>
-        </div>
-      ))}
+      <Grid container spacing={2}>
+        {data.map((userData, index) => (
+          <Grid item xs={8} sm={4} md={2.3} lg={1.25} key={index}>
+            <div onClick={() => handleUserClick(userData)}>
+              <User key={index} userData={userData} img={getImgUrlsById(userData.Avatar, characterData)}/>
+            </div>
+          </Grid>
+        ))}
+      </Grid>
       {selectedUser && (
         <Popup userData={selectedUser} onClose={handleCloseModal} />
       )}

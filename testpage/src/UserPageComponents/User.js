@@ -1,24 +1,26 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, CardHeader, CardMedia, CardContent, Typography } from '@mui/material';
 
-const User = ({ userData ,img}) => {
-
+const User = ({ userData, img }) => {
   return (
-    <Card className="card">
-      <Card.Img
-        variant="top"
-        src={img}
-        className="card-img"
+    <Card style={{ width: 150 , height : 270}}>
+      <CardMedia
+        component="img"
+        style={{ maxHeight: 120, width: 'auto' }}
+        image={img}
+        alt={userData.name}
       />
-      <Card.Header className="card-header">
-        <div className="flex items-center space-x-4">
-          <Card.Title className="card-title">{userData.name}</Card.Title>
-        </div>
-      </Card.Header>
-      <Card.Body className="card-body">
-        <p style={{ marginRight: '10px' }}>Group: {userData.group}</p>
-        <p style={{ marginRight: '10px' }}>Gender: {userData.gender}</p>
-      </Card.Body>
+      <CardHeader
+        title={userData.name}
+      />
+      <CardContent>
+        <Typography variant="body2" color="text.secondary">
+          Group: {userData.group}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Gender: {userData.gender}
+        </Typography>
+      </CardContent>
     </Card>
   );
 };
