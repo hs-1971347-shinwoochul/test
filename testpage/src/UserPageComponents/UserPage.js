@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserData, fetchCharacterData } from '../Store';
-import { Grid, TextField } from '@mui/material';
+import { Grid, TextField, CircularProgress } from '@mui/material'; // CircularProgress를 추가합니다.
 import User from './User';
 import Popup from './Popup';
 
@@ -13,10 +13,16 @@ function UserPage() {
   const [data, setData] = useState(initialData);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedUser, setSelectedUser] = useState(null);
+  const [loading, setLoading] = useState(true); // 데이터 로딩 상태를 나타내는 상태 변수를 추가합니다.
 
   useEffect(() => {
-    dispatch(fetchUserData());
-    dispatch(fetchCharacterData());
+    dispatch(fetchUserData())
+      .then(() => dispatch(fetchCharacterData())) // Character 데이터도 모두 로딩된 후에 로딩 상태를 false로 변경합니다.
+      .then(() => setLoading(false))
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setLoading(false); // 에러가 발생할 경우에도 로딩 상태를 false로 변경합니다.
+      });
   }, [dispatch]);
 
   useEffect(() => {
@@ -44,6 +50,11 @@ function UserPage() {
     const filteredItems = data.filter(item => item.id === id);
     const imgUrls = filteredItems.map(item => item.imgUrl);
     return imgUrls;
+  }
+
+  // 데이터가 로딩 중일 때 로딩 창을 표시합니다.
+  if (loading) {
+    return <CircularProgress />;
   }
 
   return (
