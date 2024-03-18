@@ -32,7 +32,6 @@ export const fetchUserData = () => async (dispatch) => {
     console.error('Error fetching data:', error);
   }
 };
-  ///default/api2/metakids_get_avatar?userID=com.lh.1@doctorr.co.kr
 export const fetchPersonalData = (userId) => async (dispatch) => {
   try {
     const address = '/default/api2/metakids_get_avatar';
