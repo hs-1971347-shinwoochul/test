@@ -51,8 +51,7 @@ function UserPage() {
     const imgUrls = filteredItems.map(item => item.imgUrl);
     return imgUrls;
   }
-
-  // 데이터가 로딩 중일 때 로딩 창을 표시합니다.
+  
   if (loading) {
     return <CircularProgress />;
   }
