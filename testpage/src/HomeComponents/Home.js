@@ -6,6 +6,10 @@ import app from "../firebase";
 export default function Home(){
     const auth = getAuth(app);
     const navigate = useNavigate();
+
+    const onLogin = () => {
+        navigate('/Login');
+    }
     
     const onLogout = () =>{
         signOut(auth)
@@ -13,10 +17,12 @@ export default function Home(){
         .catch((error)=>{console.log(error);})
         navigate('/Login');
     }
+
     return (
         <div>
             <h1>Home</h1>
-            <button onClick={onLogout}>logout</button>
+            {!auth.currentUser && <button onClick={onLogin}>logIn</button>}
+            {auth.currentUser && <button onClick={onLogout}>logout</button>}
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from 'react-hook-form';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword  } from 'firebase/auth';
+import { useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword  } from 'firebase/auth';
 import app from "../firebase";
 
 function LoginPage(){
@@ -14,19 +15,6 @@ function LoginPage(){
 
     const auth = getAuth(app);
 
-    const onCreateAccount = async(data) => {
-        try {
-            const createUser = await createUserWithEmailAndPassword(
-                auth,
-                data.email,
-                data.password,
-            );
-            console.log(createUser);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     const onSubmit = async(data) => {
         try {
             const createUser = await signInWithEmailAndPassword(
@@ -38,6 +26,12 @@ function LoginPage(){
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const navigate = useNavigate();
+
+    const onClick = () => {
+        navigate("/SignUp");
     }
 
     return(
@@ -64,28 +58,7 @@ function LoginPage(){
                 )}
             <input type="submit" />
             </form>
-            <form onSubmit={handleSubmit(onCreateAccount)}>
-                <label htmlFor="head">회원가입    </label>
-                <label htmlFor="email">Email</label>
-                <input name="email" type="email" id="email" {...register('email', { required: true, pattern: /^\S+@\S+$/i })}/>
-
-                {/* <label htmlFor="name">Name</label>
-                <input name="name" type="number" id="name" {...register('age', { min: 12, max: 80 })}/> */}
-
-                <label htmlFor="password">Password</label>
-                <input name="password" type="password" id="password" 
-                    {...register('password', { required: true, minLength: 6, maxLength: 20, })}/>
-                {errors.password && errors.password.type === 'required' && (
-                <p>비밀번호를 입력해주세요.</p>
-                )}
-                {errors.password && errors.password.type === 'minLength' && (
-                <p>비밀번호는 최소 6자 이상입니다.</p>
-                )}
-                {errors.password && errors.password.type === 'maxLength' && (
-                <p>비밀번호는 최대 20자 이하입니다.</p>
-                )}
-            <input type="submit" />
-            </form>
+            <button onClick={onClick}>SignUp</button>
         </div>
     );
 }

@@ -8,6 +8,7 @@ import Home from './HomeComponents/Home';
 import UserPage from './UserPageComponents/UserPage';
 import CharacterPage from './CharacterPageComponents/CharacterPage';
 import LoginPage from './LoginComponents/LoginPage';
+import SignupPage from './LoginComponents/SignupPage';
 
 const navLinkStyles = {
   marginRight: '1rem',
@@ -39,6 +40,7 @@ function App() {
             <Route path="/UserPage" element={<PrivateRoute/>}/>
             <Route path="/CharacterPage" element={<CharacterPage />} />
             <Route path="/Login" element={<LoginPage />} />
+            <Route path="/SignUp" element={<SignupPage />} />
           </Routes>
         </Box>
       </Container>
