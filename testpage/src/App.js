@@ -1,5 +1,5 @@
 import React,{ useEffect } from 'react';
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Routes, Route, Link, useNavigate , Navigate } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Button, Container, Box } from '@mui/material';
 import { HomeOutlined, PersonOutline, PeopleAltOutlined } from '@mui/icons-material';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -15,22 +15,10 @@ const navLinkStyles = {
 
 function App() {
   const auth = getAuth(app);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user)=>{
-      if(user) {
-        console.log("login");
-        navigate('/');
-      } else {
-        console.log("notlogin");
-        navigate('/Login');
-      }
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  const PrivateRoute = () => {
+    return auth.currentUser ? <UserPage/> : <Navigate to="/Login" replace/>;
+  }
 
   return (
     <div style={{ display: 'flex' }}>
@@ -48,7 +36,7 @@ function App() {
         <Box mt={2}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/UserPage" element={<UserPage />} />
+            <Route path="/UserPage" element={<PrivateRoute/>}/>
             <Route path="/CharacterPage" element={<CharacterPage />} />
             <Route path="/Login" element={<LoginPage />} />
           </Routes>
@@ -57,5 +45,7 @@ function App() {
     </div>
   );
 }
+
+
 
 export default App;
