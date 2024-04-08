@@ -1,4 +1,4 @@
-import React, { useState }from "react";
+import React from "react";
 import { useForm } from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword  } from 'firebase/auth';
@@ -17,7 +17,7 @@ function LoginPage(){
 
     const onSubmit = async(data) => {
         try {
-            console.log("로그인 시도");
+            console.log("try to login...");
             const createUser = await signInWithEmailAndPassword(
                 auth,
                 data.email,
@@ -54,7 +54,6 @@ function LoginPage(){
                     {errors.password && errors.password.type === 'maxLength' && (
                     <p>비밀번호는 최대 20자 이하입니다.</p>
                     )}
-                    
                 </Form>
             </div>
         </div>
