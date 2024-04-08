@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchPersonalData } from '../Store';
-import { CircularProgress } from '@mui/material'; // CircularProgress를 추가합니다.
+import { CircularProgress } from '@mui/material';
 
 const Popup = ({ userData, onClose }) => {
   const popupRef = useRef(null);

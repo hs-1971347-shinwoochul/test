@@ -8,7 +8,6 @@ function SignupPage(){
 
     const{
         register,
-        watch,
         formState: {errors},
         handleSubmit,
     } = useForm();
@@ -34,9 +33,6 @@ function SignupPage(){
                     <label htmlFor="head">회원가입    </label>
                     <label htmlFor="email">Email</label>
                     <input name="email" type="email" id="email" {...register('email', { required: true, pattern: /^\S+@\S+$/i })}/>
-
-                    {/* <label htmlFor="name">Name</label>
-                    <input name="name" type="number" id="name" {...register('age', { min: 12, max: 80 })}/> */}
 
                     <label htmlFor="password">Password</label>
                     <input name="password" type="password" id="password" 

@@ -1,8 +1,8 @@
-import React,{ useEffect } from 'react';
-import { Routes, Route, Link, useNavigate , Navigate } from "react-router-dom";
+import React from 'react';
+import { Routes, Route, Link , Navigate } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Button, Container, Box } from '@mui/material';
 import { HomeOutlined, PersonOutline, PeopleAltOutlined } from '@mui/icons-material';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import app from './firebase';
 import Home from './HomeComponents/Home';
 import UserPage from './UserPageComponents/UserPage';
@@ -25,9 +25,7 @@ function App() {
     <div style={{ display: 'flex' }}>
       <AppBar position="static" style={{ width: 200, minHeight: 1000  }}>
         <Toolbar style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
-          <Typography variant="h6" component="div">
-            My App
-          </Typography>
+          <Typography variant="h6" component="div">My App</Typography>
           <Button color="inherit" component={Link} to="/" startIcon={<HomeOutlined />} sx={navLinkStyles}>Home</Button>
           <Button color="inherit" component={Link} to="/UserPage" startIcon={<PersonOutline />} sx={navLinkStyles}>User Page</Button>
           <Button color="inherit" component={Link} to="/CharacterPage" startIcon={<PeopleAltOutlined />} sx={navLinkStyles}>Character Page</Button>
