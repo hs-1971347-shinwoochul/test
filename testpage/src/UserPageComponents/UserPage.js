@@ -24,7 +24,7 @@ function UserPage() {
         setLoading(false); // 에러가 발생할 경우에도 로딩 상태를 false로 변경합니다.
       });
   }, [dispatch]);
-
+  // 검색어에 따라 데이터를 필터링하여 업데이트합니다.
   useEffect(() => {
     const filteredData = Array.isArray(initialData)
       ? initialData.filter((userData) =>
@@ -33,19 +33,19 @@ function UserPage() {
       : [];
     setData(filteredData);
   }, [searchTerm, initialData]);
-
+  // 검색어를 업데이트하는 함수
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
-
+  // 사용자를 클릭했을 때 선택된 사용자를 업데이트하는 함수
   const handleUserClick = (userData) => {
     setSelectedUser(userData);
   };
-
+  // 모달을 닫는 함수
   const handleCloseModal = () => {
     setSelectedUser(null);
   };
-
+  // id에 해당하는 캐릭터 이미지 URL을 가져오는 함수
   function getImgUrlsById(id, data) {
     const filteredItems = data.filter(item => item.id === id);
     const imgUrls = filteredItems.map(item => item.imgUrl);

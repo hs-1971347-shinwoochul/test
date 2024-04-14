@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchCharacterData } from '../Store';
-import { CircularProgress } from '@mui/material'; // CircularProgress를 추가합니다.
+import { CircularProgress } from '@mui/material';
 import './CharacterPage.css';
 import Character from './Character';
 

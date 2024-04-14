@@ -9,8 +9,9 @@ export default function Home(){
 
     const navigate = useNavigate();
 
+    //로그인 상태 확인, auth.currentUser가 변경 될 때 마다 실행
     useEffect(()=>{
-        if(auth.currentUser){
+        if(auth.currentUser){//로그인 되었다면 사용자를 상태에 저장
             setUser(auth.currentUser);
         }else{
             setUser(null);

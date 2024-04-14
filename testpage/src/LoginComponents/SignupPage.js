@@ -17,6 +17,7 @@ function SignupPage(){
 
     const onCreateAccount = async(data) => {
         try {
+            // Firebase의 createUserWithEmailAndPassword() 함수를 사용하여 회원가입
             const createUser = await createUserWithEmailAndPassword(
                 auth,
                 data.email,
@@ -29,7 +30,7 @@ function SignupPage(){
     }
     const navigate = useNavigate();
     const onClick = () => {
-        navigate("/LogIn");
+        navigate("/LogIn");// 버튼 클릭 시 /LogIn 페이지로 이동
     }
 
     return(

@@ -13,7 +13,7 @@ function LoginPage(){
         handleSubmit,
     } = useForm();
 
-    const auth = getAuth(app);
+    const auth = getAuth(app); // firebase 앱을 사용해 인증 객체 가져오기
 
     const onSubmit = async(data) => {
         try {
@@ -23,7 +23,7 @@ function LoginPage(){
                 data.email,
                 data.password,
             );   
-            navigate('/');
+            navigate('/'); // 로그인 성공 시 '/' 경로로 이동
         } catch (error) {
             console.log(error);
         }
@@ -32,7 +32,7 @@ function LoginPage(){
     const navigate = useNavigate();
 
     const onClick = () => {
-        navigate("/SignUp");
+        navigate("/SignUp"); // 회원가입 페이지로 이동하는 함수
     }
 
     return(
