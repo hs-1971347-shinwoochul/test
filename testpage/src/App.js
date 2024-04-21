@@ -9,6 +9,7 @@ import UserPage from './UserPageComponents/UserPage';
 import CharacterPage from './CharacterPageComponents/CharacterPage';
 import LoginPage from './LoginComponents/LoginPage';
 import SignupPage from './LoginComponents/SignupPage';
+import DBTestPage from './DBTestPageComponent/DBTestPage';
 
 const navLinkStyles = {
   marginRight: '1rem',
@@ -31,6 +32,7 @@ function App() {
           <Button color="inherit" component={Link} to="/" startIcon={<HomeOutlined />} sx={navLinkStyles}>Home</Button>
           <Button color="inherit" component={Link} to="/UserPage" startIcon={<PersonOutline />} sx={navLinkStyles}>User Page</Button>
           <Button color="inherit" component={Link} to="/CharacterPage" startIcon={<PeopleAltOutlined />} sx={navLinkStyles}>Character Page</Button>
+          <Button color="inherit" component={Link} to="/DB" startIcon={<PeopleAltOutlined />} sx={navLinkStyles}>Test Page</Button>
         </Toolbar>
       </AppBar>
       {/*페이지 영역*/}
@@ -43,6 +45,7 @@ function App() {
             <Route path="/CharacterPage" element={<CharacterPage />} />
             <Route path="/Login" element={<LoginPage />} />
             <Route path="/SignUp" element={<SignupPage />} />
+            <Route path="/DB" element={<DBTestPage />} />
           </Routes>
         </Box>
       </Container>
