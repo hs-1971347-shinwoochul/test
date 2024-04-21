@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, set } from "firebase/database";
 import { db } from "../firebase";
 
 function DBTestPage() {
@@ -30,9 +30,11 @@ function DBTestPage() {
     const newData = [...userData];
     newData[index].money = newValue;
     setUserData(newData);
+  };
 
-    // 데이터베이스에 변경된 값 업데이트
-    db.ref(`user/${index + 1}/money`).set(newValue);
+  const handleSaveMoney = (index, newValue) => {
+    // 변경된 돈 값 데이터베이스에 저장
+    set(ref(db, `user/${index + 1}/money`), newValue);
   };
 
   return (
@@ -46,6 +48,7 @@ function DBTestPage() {
               value={user.money}
               onChange={(e) => handleMoneyChange(index, e.target.value)}
             />
+            <button onClick={() => handleSaveMoney(index, user.money)}>저장</button>
           </p>
         </div>
       ))}
